@@ -5,13 +5,13 @@ require 'rake/clean'
 require 'spec/rake/spectask'
 require 'erb'
 require 'pathname'
+require File.dirname(__FILE__) + "/lib/version"
 
 # Application own Settings
 APPNAME   = "Sinkr"
+APPVERSION= Sinkr.version
 TARGET    = "#{APPNAME}.app"
-# VERSION   = "rev#{`svn info`[/Revision: (\d+)/, 1]}"
-VERSION   = "0.1"
-RESOURCES = ['*.rb', '*.lproj', 'Credits.*', '*.icns']
+RESOURCES = ['lib', '*.lproj', 'Credits.*', '*.icns']
 PKGINC    = [TARGET, 'README', 'html', 'client']
 LOCALENIB = [] #['Japanese.lproj/Main.nib']
 PUBLISH   = 'yourname@yourhost:path'
@@ -34,7 +34,7 @@ end
 
 desc 'Create .dmg file for Publish'
 task :package => [:clean, 'pkg', TARGET] do
-	name = "#{APPNAME}.#{VERSION}"
+	name = "#{APPNAME}.#{APPVERSION}"
 	sh %{
 	mkdir image
 	cp -r #{PKGINC.join(' ')} image
@@ -57,7 +57,7 @@ task :publish => [:package] do
 	path = Pathname.new path
 	puts "Publish: Host: %s, Path: %s" % [host, path]
 	sh %{
-	scp pkg/IIrcv.#{VERSION}.dmg #{PUBLISH}/pkg
+	scp pkg/IIrcv.#{APPVERSION}.dmg #{PUBLISH}/pkg
 	scp CHANGES #{PUBLISH}/pkg
 	scp -r html/* #{PUBLISH}
 	}
@@ -83,7 +83,7 @@ file TARGET => [:clean, APPNAME] + LOCALENIB do
 	cp -rp #{RESOURCES.join(' ')} "#{APPNAME}.app/Contents/Resources"
 	cp '#{APPNAME}' "#{APPNAME}.app/Contents/MacOS"
 	echo -n "APPL????" > "#{APPNAME}.app/Contents/PkgInfo"
-	echo -n #{VERSION} > "#{APPNAME}.app/Contents/Resources/VERSION"
+	echo -n #{APPVERSION} > "#{APPNAME}.app/Contents/Resources/APPVERSION"
 	}
 	File.open("#{APPNAME}.app/Contents/Info.plist", "w") do |f|
 		f.puts ERB.new(File.read("Info.plist.erb")).result
