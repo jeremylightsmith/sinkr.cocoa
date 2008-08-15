@@ -1,4 +1,86 @@
-{
-    IBClasses = ({CLASS = FirstResponder; LANGUAGE = ObjC; SUPERCLASS = NSObject; }); 
-    IBVersion = 1; 
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IBClasses</key>
+	<array>
+		<dict>
+			<key>CLASS</key>
+			<string>YearsController</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>app_controller</key>
+				<string>AppController</string>
+				<key>view</key>
+				<string>NSTableView</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>FirstResponder</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>SUPERCLASS</key>
+			<string>NSObject</string>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>NSObject</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>view</key>
+				<string>NSTableView</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>IPhotoEventsController</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>app_controller</key>
+				<string>AppController</string>
+				<key>view</key>
+				<string>NSTableView</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>FlickrEventsController</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>app_controller</key>
+				<string>AppController</string>
+				<key>view</key>
+				<string>NSTableView</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>CLASS</key>
+			<string>AppController</string>
+			<key>LANGUAGE</key>
+			<string>ObjC</string>
+			<key>OUTLETS</key>
+			<dict>
+				<key>flickr_events</key>
+				<string>FlickrEventsController</string>
+				<key>iphoto_events</key>
+				<string>IPhotoEventsController</string>
+				<key>window</key>
+				<string>NSWindow</string>
+				<key>years</key>
+				<string>YearsController</string>
+			</dict>
+		</dict>
+	</array>
+	<key>IBVersion</key>
+	<string>1</string>
+</dict>
+</plist>

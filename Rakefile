@@ -11,7 +11,8 @@ require File.dirname(__FILE__) + "/lib/version"
 APPNAME   = "Sinkr"
 APPVERSION= Sinkr.version
 TARGET    = "#{APPNAME}.app"
-RESOURCES = ['lib', '*.lproj', 'Credits.*', '*.icns']
+RESOURCES = ['lib', '*.lproj']
+# RESOURCES = ['lib', '*.lproj', 'Credits.*', '*.icns']
 PKGINC    = [TARGET, 'README', 'html', 'client']
 LOCALENIB = [] #['Japanese.lproj/Main.nib']
 PUBLISH   = 'yourname@yourhost:path'
@@ -21,14 +22,19 @@ BUNDLEID  = "rubyapp.#{APPNAME}"
 CLEAN.include ['**/.*.sw?', '*.dmg', TARGET, 'image', 'a.out']
 
 # Tasks
-task :default => [:spec, :test]
+task :default => [:spec, :run]
 
 Spec::Rake::SpecTask.new(:spec) do |t|
   t.spec_files = FileList['spec/**/*_spec.rb']
 end
 
 desc 'Create Application Bundle and Run it.'
-task :test => [TARGET] do
+task :run => [TARGET] do
+	exec %{#{TARGET}/Contents/MacOS/#{APPNAME}}
+end
+
+desc 'Create Application Bundle and Run it.'
+task :open => [TARGET] do
 	sh %{open '#{TARGET}'}
 end
 

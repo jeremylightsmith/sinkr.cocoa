@@ -1,10 +1,16 @@
-
 begin
 require 'rubygems'
 rescue LoadError
 end
 require 'osx/cocoa'
-require 'pathname'
+
+require 'fileutils'
+
+module Kernel
+  def puts(*args)
+    $stderr.puts(*args)
+  end
+end
 
 def log(*args)
 	args.each do |m|
@@ -16,12 +22,18 @@ def _(key)
 	NSLocalizedString(key, '').to_s
 end
 
-path = Pathname.new OSX::NSBundle.mainBundle.resourcePath.fileSystemRepresentation
-Pathname.glob(path + '*.rb') do |file|
-	next if file.to_s == __FILE__
-	require(file)
+def ruby_files
+  FileUtils.chdir File.dirname(__FILE__) do
+    return Dir["**/*.rb"]
+  end
 end
-OSX::NSApplication.sharedApplication
-OSX.NSApplicationMain(0, nil)
 
-
+if $0 == __FILE__ then
+  require File.dirname(__FILE__) + "/sinkr"
+  ruby_files.each do |f| 
+    next if f == 'sinkr.rb' || f == 'main.rb'
+    require f
+  end
+  OSX::NSApplication.sharedApplication
+  OSX.NSApplicationMain(0, nil)
+end

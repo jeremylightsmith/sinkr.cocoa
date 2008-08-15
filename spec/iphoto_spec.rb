@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/spec_helper'
 
-describe Iphoto do
+describe IPhoto do
   include FileSandbox
   attr_reader :iphoto
 
@@ -11,7 +11,7 @@ describe Iphoto do
     sandbox.new :file => 'Originals/2008/Reception/IMG_3.JPG'
     sandbox.new :file => 'Modified/2007/Proposal/IMG_0.JPG'
 
-    @iphoto = Iphoto.new(sandbox.root)
+    @iphoto = IPhoto.new(sandbox.root)
   end
   
   it "should know about years" do
@@ -21,6 +21,10 @@ describe Iphoto do
   it "should know about events" do
     iphoto.years.by_name('2007').events.names.should == %w(Proposal)
     iphoto.years.by_name('2008').events.names.sort.should == %w(Reception Wedding)
+  end
+  
+  it "should know about all events" do
+    iphoto.events.names.sort.should == %w(Proposal Reception Wedding)
   end
   
   it "should about pictures"

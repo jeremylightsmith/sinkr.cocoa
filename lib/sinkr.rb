@@ -17,8 +17,11 @@ rescue SocketError
   puts "can't connect to flickr"
 end
 
+require 'app_controller'
 require "array_ext"
 require 'iphoto'
+require 'event'
+require 'years_controller'
 
 FLICKR_USER_ID = '30294775@N00'
 
